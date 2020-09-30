@@ -1,0 +1,54 @@
+<app-nav></app-nav>
+<form #createEmployeeForm="ngForm" (ngSubmit)="create()">
+    <div class="login-form-main-message"></div>
+    <div class="main-login-form">
+        <div class="login-group">
+            <div class="form-group">
+                <label for="employeename" class="sr-only">Department</label>
+                <select required class="form-control" ngModel #departmentid="ngModel" name="departmentid" id="departmentid" >
+                    <option value="">Choose department</option>
+                    <option *ngFor="let dep of departmentList" [value]="dep.id">{{dep.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="employeename" class="sr-only">Name</label>
+                <input type="text" class="form-control" id="name" required name="name" ngModel #name="ngModel"
+                    placeholder="Employee Name">
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="ismanager" name="ismanager" #ismanager="ngModel" ngModel> Is Manager
+
+                <input type="checkbox" id="isactive" name="isactive" #isactive="ngModel" ngModel> Is Active
+            </div>
+
+            <div class="form-group">
+                <label for="employeeage" class="sr-only">Age</label>
+                <input type="number" class="form-control" id="age" required name="age" #age="ngModel" ngModel
+                    placeholder="Employee Age">
+            </div>
+
+            <div class="form-group">
+                <label for="employeeemail" class="sr-only">Email</label>
+                <input type="email" class="form-control" id="email" required name="email" ngModel #email="ngModel"
+                    placeholder="Employee Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                <div lines="none" *ngIf="!email.valid && email.touched && email.hasError('pattern')" style="color:red">
+                    please enter valid email
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="employeephone" class="sr-only">Mobile</label>
+                <!--  #mobile="ngModel" -->
+                <input  class="form-control" maxlength="11" minlength="11" id="mobile" required
+                    name="mobile" #mobile="ngModel" ngModel pattern="^((\\+91-?)|0)?[0-9]{10}$" placeholder="Employee Mobile">
+                    <div lines="none" *ngIf="!mobile.valid && mobile.touched && mobile.hasError('pattern')" style="color:red">
+                        please enter valid mobile
+                    </div>
+            </div>
+
+
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="!createEmployeeForm.valid">Add Employee</button>
+        <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+    </div>
+</form>

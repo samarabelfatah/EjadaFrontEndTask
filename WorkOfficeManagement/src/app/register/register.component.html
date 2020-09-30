@@ -1,0 +1,29 @@
+<form #registerForm="ngForm" (ngSubmit)="register()">
+    <div class="login-form-main-message"></div>
+    <div class="main-login-form">
+        <div class="login-group">
+            <div class="form-group">
+                <label for="username" class="sr-only">Full Name</label>
+                <input type="text" class="form-control" id="fullname" ngModel required name="fullname"  placeholder="Full Name">
+            </div> 
+            <div class="form-group">
+                <label for="username" class="sr-only">Username</label>
+                <input type="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required name="email" ngModel placeholder="Username" #email="ngModel">
+            </div> 
+            <div lines="none" *ngIf="!email.valid && email.touched && email.hasError('pattern')" style="color:red">
+                please enter valid email
+            </div>
+            <div class="form-group">
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" class="form-control" id="password" required name="password" ngModel placeholder="Password">
+            </div>
+            
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">Register</button>
+        <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+        <a class="my-2 my-sm-0" routerLink="" style="margin: 22px;">Login</a> 
+
+
+    </div>
+   
+</form>

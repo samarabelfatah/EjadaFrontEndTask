@@ -1,0 +1,40 @@
+<app-nav></app-nav>
+<div class="container">
+<button class="btn btn-success" (click)="addEmployee()" >Add Employee</button>
+<br/>
+<br/>
+
+<div class="example" >
+    <input type="text" placeholder="Search Department Or Employee" name="search" ngModel #searchvalue="ngModel">
+    <button type="button" (click)="searchDepartment()"><i class="fa fa-search"></i></button>
+</div>
+
+<br/>
+<br/>
+
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Department</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Age</th>
+                <th scope="col">Active</th>
+                <th scope="col">Is Department Manager</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of employeeList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" >
+                <th scope="row">{{item.departmentName}}</th>
+                <td>{{item.name}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.mobile}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.isActive}}</td>
+                <td>{{item.isManager}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <ngb-pagination class="d-flex justify-content-center" [(page)]="page" [pageSize]="pageSize" [collectionSize]="employeeList.length"></ngb-pagination>
+</div>
